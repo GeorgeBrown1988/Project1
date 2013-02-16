@@ -7,7 +7,7 @@ class CDataQueueService;
 class CDataBaseService;
 class CMsgTriggerService;
 class CTCPSocketService;
-
+interface IDataQueueServiceSink;
 //连接对象回调接口
 //interface IServerSocketItemSink
 //{
@@ -20,14 +20,14 @@ class CTCPSocketService;
 //};
 
 //方案一数据队列为单独的服务 
-interface IDataQueueService
+interface IDataQueueService:public CObject
 {
 	//启动服务 
 	virtual bool __cdecl StartService()=NULL;
 	//结束服务 
 	virtual bool __cdecl EndService()=NULL;
 	//设置接口
-	virtual bool __cdecl SetDataQueueServiceSink(CObject * pobj)=NULL;
+	virtual bool __cdecl SetDataQueueServiceSink(IDataQueueServiceSink * pobj)=NULL;
 	//获取负荷信息 
 	virtual bool __cdecl GetDataQueueInfo(tagBurthenInfo &)=NULL;
 
@@ -47,7 +47,7 @@ interface IDataQueueServiceSink:public CObject
 /*
 	说明：为兼容旧系统，函数参数尽量与旧系统相同。
 */
-interface IDBError
+interface IDBError : public CObject
 {
 	//显示错误消息
 	virtual void __cdecl ShowErrorMsg()=NULL;
@@ -136,7 +136,7 @@ interface IDataBaseService : public CObject
 	//注册钩子
 	virtual bool __cdecl SetDataBaseSink(CObject * pIObject)=NULL;
 	//获取接口
-	virtual bool __cdecl GetQueueService(CDataQueueService ** pIObject)=NULL;
+	virtual bool __cdecl GetQueueService(IDataQueueService ** pIObject)=NULL;
 };
 
 //TCP SOCKET 引擎管理接口
@@ -208,7 +208,7 @@ public:
 	//设置钩子
 	virtual bool __cdecl SetMsgTriggerServiceSink(CObject * pIObject)=NULL;
 	//获取接口
-	virtual bool __cdecl GetMsgTriggerQueueService(CDataQueueService ** pIObject)=NULL;
+	virtual bool __cdecl GetMsgTriggerQueueService(IDataQueueService ** pIObject)=NULL;
 };
 
 //服务引擎接口
@@ -235,15 +235,15 @@ public:
 	//服务查询
 public:
 	//获取数据库引擎接口
-	virtual bool __cdecl GetDataBaseService(CDataBaseService ** pIObject)=NULL;
+	virtual bool __cdecl GetDataBaseService(IDataBaseService ** pIObject)=NULL;
 	//获取调度引擎接口
-	virtual bool __cdecl GetMsgTriggerService(CMsgTriggerService ** pIObject)=NULL;
+	virtual bool __cdecl GetMsgTriggerService(IMsgTriggerService ** pIObject)=NULL;
 	//获取网络引擎接口
-	virtual bool __cdecl GetTCPSocketService(CTCPSocketService ** pIObject)=NULL;
+	virtual bool __cdecl GetTCPSocketService(ITCPSocketService ** pIObject)=NULL;
 	//获取接口
-	virtual bool __cdecl GetDataBaseQueueService(CDataQueueService ** pIObject)=NULL;
+	virtual bool __cdecl GetDataBaseQueueService(IDataQueueService ** pIObject)=NULL;
 	//获取接口
-	virtual bool __cdecl GetMsgTriggerQueueService(CDataQueueService ** pIObject)=NULL;
+	virtual bool __cdecl GetMsgTriggerQueueService(IDataQueueService ** pIObject)=NULL;
 
 	//功能接口
 public:

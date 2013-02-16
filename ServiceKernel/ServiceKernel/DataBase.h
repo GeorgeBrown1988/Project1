@@ -127,7 +127,7 @@ private:
 	int									m_col;
 	enum DBTYPE							m_eType;
 };
-class CDBError :public IDBError, public CObject
+class CDBError :public IDBError
 {
 public:
 	//
@@ -260,7 +260,7 @@ private:
 //////////////////////////////////////////////////////////////////////////
 
 //数据库管理类
-class CDataBaseService : public IDataBaseService, public IDataQueueServiceSink,public CObject
+class CDataBaseService : public IDataBaseService, public IDataQueueServiceSink
 {
 	//内核变量
 protected:
@@ -285,7 +285,7 @@ public:
 	//注册钩子
 	virtual bool __cdecl SetDataBaseSink(CObject * pIObject);
 	//获取接口
-	virtual bool __cdecl GetQueueService(CDataQueueService ** pIObject);
+	virtual bool __cdecl GetQueueService(IDataQueueService ** pIObject);
 
 	//队列接口
 public:

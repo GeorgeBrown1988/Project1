@@ -104,10 +104,10 @@ CDataQueueService::~CDataQueueService(void)
 }
 
 //…Ë÷√Ω”ø⁄
-bool __cdecl CDataQueueService::SetDataQueueServiceSink(CObject * pobject)
+bool __cdecl CDataQueueService::SetDataQueueServiceSink(IDataQueueServiceSink * pobject)
 {
 	////ASSERT(pIUnknownEx!=NULL);
-	m_pIQueueServiceSink=dynamic_cast<IDataQueueServiceSink*>(pobject);
+	m_pIQueueServiceSink=pobject;
 	////ASSERT(m_pIQueueServiceSink!=NULL);
 	return (m_pIQueueServiceSink!=NULL);
 }

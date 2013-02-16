@@ -63,7 +63,7 @@ bool CDataBaseSink::InitDataBaseSink(IKernelService *pObject)
 			//}
 
 			//获取逻辑引擎
-			CMsgTriggerService * pIIMsgTriggerService = NULL;
+			IMsgTriggerService * pIIMsgTriggerService = NULL;
 			if (pObject->GetMsgTriggerService(&pIIMsgTriggerService) == false) 
 			{
 				#ifdef _DEBUG
@@ -73,15 +73,16 @@ bool CDataBaseSink::InitDataBaseSink(IKernelService *pObject)
 			}
 
 			//设置通知组件
-			CDataQueueService * pIQueueService = NULL;
-			if(pIIMsgTriggerService->GetMsgTriggerQueueService(&pIQueueService) == false)
+			IDataQueueService * pIDataQueueService = NULL;
+			if(pIIMsgTriggerService->GetMsgTriggerQueueService(&pIDataQueueService) == false)
 			{
 				#ifdef _DEBUG
 					LOG(INFO)<<"调度引擎队列获取失败";
 				#endif
 				throw 0;
 			}
-			if (m_QueueServiceEvent.SetQueueService(pIQueueService) == false) 
+			IDataQueueSink *pIDataQueueSink = dynamic_cast<IDataQueueSink *>(pIDataQueueService);
+			if (m_QueueServiceEvent.SetQueueService(pIDataQueueSink) == false) 
 			{
 				#ifdef _DEBUG
 					LOG(INFO)<<"逻辑引擎通知接口设置失败";

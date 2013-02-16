@@ -2,7 +2,7 @@
 #include "Interface.h"
 #include "QueueService.h"
 //调度管理类
-class CMsgTriggerService : public IMsgTriggerService, public IDataQueueServiceSink,public CObject
+class CMsgTriggerService : public IMsgTriggerService, public IDataQueueServiceSink
 {
 	//核心变量
 protected:
@@ -33,7 +33,7 @@ public:
 	//注册钩子
 	virtual bool __cdecl SetMsgTriggerServiceSink(CObject * pIObject);
 	//获取接口
-	virtual bool __cdecl GetMsgTriggerQueueService(CDataQueueService ** pIObject);
+	virtual bool __cdecl GetMsgTriggerQueueService(IDataQueueService ** pIObject);
 
 	//队列接口
 public:

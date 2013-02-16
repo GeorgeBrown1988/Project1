@@ -46,15 +46,15 @@ public:
 	//服务查询
 public:
 	//获取数据库引擎接口
-	virtual bool __cdecl GetDataBaseService(CDataBaseService ** pIObject);
+	virtual bool __cdecl GetDataBaseService(IDataBaseService ** pIObject);
 	//获取调度引擎接口
-	virtual bool __cdecl GetMsgTriggerService(CMsgTriggerService ** pIObject);
+	virtual bool __cdecl GetMsgTriggerService(IMsgTriggerService ** pIObject);
 	//获取网络引擎接口
-	virtual bool __cdecl GetTCPSocketService(CTCPSocketService ** pIObject);
+	virtual bool __cdecl GetTCPSocketService(ITCPSocketService ** pIObject);
 	//获取数据库队列接口
-	virtual bool __cdecl GetDataBaseQueueService(CDataQueueService ** pIObject);
+	virtual bool __cdecl GetDataBaseQueueService(IDataQueueService ** pIObject);
 	//获取调度队列接口
-	virtual bool __cdecl GetMsgTriggerQueueService(CDataQueueService ** pIObject);
+	virtual bool __cdecl GetMsgTriggerQueueService(IDataQueueService ** pIObject);
 //MAKR
 	//功能接口
 public:

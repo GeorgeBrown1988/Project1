@@ -14,7 +14,7 @@ public:
 protected:
 	CQueueServiceEvent				m_DataBaseEvent;					//数据库通知
 	//接口变量
-	CTCPSocketService				* m_pITCPSocketService;				//网络接口
+	ITCPSocketService				* m_pITCPSocketService;				//网络接口
 	//
 	CServerList						m_ServerListCenter;
 

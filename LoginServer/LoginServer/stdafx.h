@@ -33,8 +33,10 @@
 #pragma comment(lib,"comctl32.lib")
 #pragma comment(lib,"CommonServiceD.lib")
 #ifdef _DEBUG
+#pragma comment(lib,"CommonServiceD.lib")
 #pragma comment(lib,"ServiceKernelD.lib")
 #else
+#pragma comment(lib,"CommonService.lib")
 #pragma comment(lib,"ServiceKernel.lib")
 #endif
 

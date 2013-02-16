@@ -39,7 +39,7 @@ private:
 };
 //
 //数据队列类
-class CDataQueueService : public IDataQueueService,public CObject,public IDataQueueSink 
+class CDataQueueService : public IDataQueueService,public IDataQueueSink 
 {
 	friend class CDataQueueServiceThread;
 
@@ -73,7 +73,7 @@ public:
 	//停止服务
 	virtual bool __cdecl EndService();
 	//设置接口
-	virtual bool __cdecl SetDataQueueServiceSink(CObject * pobject);
+	virtual bool __cdecl SetDataQueueServiceSink(IDataQueueServiceSink * pobj);
 	//负荷信息
 	virtual bool __cdecl GetDataQueueInfo(tagBurthenInfo & BurthenInfo);
 	//辅助函数

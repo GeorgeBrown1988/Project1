@@ -5,11 +5,11 @@ class CLoginService
 protected:
 	//CCenterSocket					m_CenterSocket;						//中心连接
 	CDataBaseSink					m_DataBaseSink;						//数据库钩子
-	CMsgTriggerServiceSink			m_MsgTriggerSink;						//调度钩子
+//	CMsgTriggerServiceSink			m_MsgTriggerSink;						//调度钩子
 
 	//组件变量
 protected:
-	CKernelService					m_ServiceEngine;					//服务引擎
+	//CKernelService					*m_KernelService;					//服务引擎
 	//函数定义
 public:
 	//构造函数

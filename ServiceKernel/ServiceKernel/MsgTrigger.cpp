@@ -58,7 +58,9 @@ bool __cdecl CMsgTriggerService::StartService()
 	}
 
 	//启动外挂
-	if (m_pIMsgTriggerServiceSink->StartService(this)==false)
+	CObject *pObject = m_pIMsgTriggerServiceSink;
+	if (m_pIMsgTriggerServiceSink->StartService(pObject)==false)
+	//if (m_pIMsgTriggerServiceSink->StartService(this)==false)
 	{
 		#ifdef _DEBUG
 			LOG(INFO) <<"调度引擎外挂服务启动失败";
@@ -94,7 +96,10 @@ bool __cdecl CMsgTriggerService::EndService()
 	//停止外挂
 	if (m_pIMsgTriggerServiceSink!=NULL)
 	{
-		m_pIMsgTriggerServiceSink->EndService(this);//(IMsgTriggerServiceSink*)
+		CObject *pObject = m_pIMsgTriggerServiceSink;
+		m_pIMsgTriggerServiceSink->EndService(pObject);
+		//m_pIMsgTriggerServiceSink->EndService(this)
+		//(IMsgTriggerServiceSink*)
 	}
 
 	return true;
@@ -133,9 +138,9 @@ bool __cdecl CMsgTriggerService::SetMsgTriggerServiceSink(CObject * pIObject)
 }
 
 //获取接口
-bool __cdecl CMsgTriggerService::GetMsgTriggerQueueService(CDataQueueService ** pIObject)
+bool __cdecl CMsgTriggerService::GetMsgTriggerQueueService(IDataQueueService ** pIObject)
 {
-	*pIObject = dynamic_cast<CDataQueueService*>(&m_RequestQueueService);
+	*pIObject = &m_RequestQueueService;
 	if(pIObject)
 		return true;
 	else

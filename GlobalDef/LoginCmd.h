@@ -97,7 +97,7 @@ struct DBR_GP_LogonError
 struct CMD_GP_LogonByAccounts
 {
 	long								dwPlazaVersion;					//广场版本
-	char								szAccounts[NAME_LEN];			//登录帐号
+	char								szAccounts[USERNAME_LEN];			//登录帐号
 	char								szPassWord[PASS_LEN];			//登录密码
 };
 
@@ -115,8 +115,8 @@ struct CMD_GP_RegisterAccounts
 	int								wFaceID;						//头像标识
 	char								cbGender;						//用户性别
 	long								dwPlazaVersion;					//广场版本
-	char								szSpreader[NAME_LEN];			//推广人名
-	char								szAccounts[NAME_LEN];			//登录帐号
+	char								szSpreader[USERNAME_LEN];			//推广人名
+	char								szAccounts[USERNAME_LEN];			//登录帐号
 	char								szPassWord[PASS_LEN];			//登录密码
 };
 

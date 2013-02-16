@@ -69,7 +69,7 @@ bool CCenterService::IsService()
 void CCenterService::InitCenterService()
 {
 	m_pKernelService->InitKernelService(::g_uCenterServerPort,512);
-	CTCPSocketService *pTCPSocketService;
+	ITCPSocketService *pTCPSocketService;
 	if(m_pKernelService->GetTCPSocketService(&pTCPSocketService) == false)
 	{
 		;

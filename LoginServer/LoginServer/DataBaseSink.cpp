@@ -72,7 +72,7 @@ bool CDataBaseSink::InitDataBaseSink(IKernelService *pObject)
 		{
 
 			//获取逻辑引擎
-			CMsgTriggerService * pIIMsgTriggerService = NULL;
+			IMsgTriggerService * pIIMsgTriggerService = NULL;
 			if (pObject->GetMsgTriggerService(&pIIMsgTriggerService) == false) 
 			{
 				#ifdef _DEBUG
@@ -82,15 +82,16 @@ bool CDataBaseSink::InitDataBaseSink(IKernelService *pObject)
 			}
 
 			//设置通知组件
-			CDataQueueService * pIQueueService = NULL;
-			if(pIIMsgTriggerService->GetMsgTriggerQueueService(&pIQueueService) == false)
+			IDataQueueService * pIDataQueueService = NULL;
+			if(pIIMsgTriggerService->GetMsgTriggerQueueService(&pIDataQueueService) == false)
 			{
 				#ifdef _DEBUG
 					LOG(INFO)<<"调度引擎队列获取失败";
 				#endif
 				throw 0;
 			}
-			if (m_QueueServiceEvent.SetQueueService(pIQueueService) == false) 
+			IDataQueueSink *pDataQueueSink = dynamic_cast<IDataQueueSink *>(pIDataQueueService);
+			if (m_QueueServiceEvent.SetQueueService(pDataQueueSink) == false) 
 			{
 				#ifdef _DEBUG
 					LOG(INFO)<<"逻辑引擎通知接口设置失败";
@@ -110,21 +111,21 @@ bool CDataBaseSink::InitDataBaseSink(IKernelService *pObject)
 //登录请求处理
 bool CDataBaseSink::OnRequestLogon(const NTY_DataBaseEvent & DataBaseEvent, void * pDataBuffer, WORD wDataSize)
 {
-	;
+	return true;
 }
 //I D 存储过程
 LONG CDataBaseSink::SPLogonByUserID(DWORD dwGameID, LPCTSTR pszPassword, DWORD dwClientIP, LPCTSTR pszComputerID)
 {
-	;
+	return true;
 }
 //帐号存储过程
 LONG CDataBaseSink::SPLogonByAccounts(LPCTSTR pszAccounts, LPCTSTR pszPassword, DWORD dwClientIP, LPCTSTR pszComputerID)
 {
-	;
+	return true;
 }
 //注册存储过程
 LONG CDataBaseSink::SPRegisterAccounts(LPCTSTR pszAccounts, LPCTSTR pszPassword, LPCTSTR pszSpreader, WORD wFaceID, BYTE cbGender, DWORD dwClientIP, LPCTSTR pszComputerID)
 {
-	;
+	return true;
 }
 

@@ -2,7 +2,7 @@
 //#include"../../ServiceKernel/ServiceKernel/Interface.h"
 #include "../../GlobalDef/GlobalDef.h"
 //同步对象接口
-interface IThreadLock
+interface IThreadLock:public CObject
 {
 public:
 	//锁定函数
@@ -12,7 +12,7 @@ public:
 };
 
 //线程接口
-interface IThread
+interface IThread:public CObject
 {
 public:
 	//状态判断
@@ -28,7 +28,7 @@ public:
 
 
 //临界区同步类
-class CThreadLock : public IThreadLock,public CObject
+class CThreadLock : public IThreadLock
 {
 	//变量定义
 private:
@@ -79,7 +79,7 @@ public:
 
 
 //线程对象类
-class __declspec(dllexport) CThread : public IThread,public CObject
+class __declspec(dllexport) CThread : public IThread
 {
 	//变量定义
 private:

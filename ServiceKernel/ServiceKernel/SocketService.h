@@ -268,7 +268,7 @@ private:
 
 //Õ¯¬Áπ‹¿Ì¿‡
 class CTCPSocketService : public ITCPSocketService, public ITCPSocketServiceManager, 
-	public IServerSocketItemSink, public IDataQueueServiceSink ,public CObject
+	public IServerSocketItemSink, public IDataQueueServiceSink 
 {
 	friend class CServerSocketRSThread;
 	friend class CSocketAcceptThread;

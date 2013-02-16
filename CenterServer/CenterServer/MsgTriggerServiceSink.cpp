@@ -43,12 +43,13 @@ bool CMsgTriggerServiceSink::InitMsgTriggerSink(CKernelService * pICObject)
 		return false;
 	if(pICObject->GetTCPSocketService(&m_pITCPSocketService) == false)
 		return false;
-	CDataBaseService *pIDataBaseService;
+	IDataBaseService *pIDataBaseService;
 	if(pICObject->GetDataBaseService(&pIDataBaseService) == false)
 		return false;
-	CDataQueueService *pIDataQueueSink;
-	if(pIDataBaseService->GetQueueService(&pIDataQueueSink) == false)
+	IDataQueueService *pIDataQueueService;
+	if(pIDataBaseService->GetQueueService(&pIDataQueueService) == false)
 		return false;
+	IDataQueueSink *pIDataQueueSink = dynamic_cast<IDataQueueSink *>(pIDataQueueService);
 	if(m_DataBaseEvent.SetQueueService(pIDataQueueSink) == false)
 		return false;
 	return true;

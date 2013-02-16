@@ -523,7 +523,7 @@ bool __cdecl CDataBaseService::SetDataBaseSink(CObject * pIObject)
 }
 
 //获取接口
-bool __cdecl CDataBaseService::GetQueueService(CDataQueueService ** pIObject)
+bool __cdecl CDataBaseService::GetQueueService(IDataQueueService ** pIObject)
 {
 	*pIObject = &m_RequestQueueService;
 	if(*pIObject)
@@ -563,7 +563,8 @@ bool __cdecl CDataBaseService::StartService()
 	}
 
 	//启动外挂
-	if (m_pIDataBaseSink->StartService(this)==false)//NEW
+	if (m_pIDataBaseSink->StartService(m_pIDataBaseSink)==false)//NEW
+	//if (m_pIDataBaseSink->StartService(this)==false)
 	{
 #ifdef _DEBUG
 		 LOG(INFO)<<"数据库引擎外挂服务启动失败";
@@ -598,7 +599,8 @@ bool __cdecl CDataBaseService::EndService()
 	//停止外挂
 	if (m_pIDataBaseSink!=NULL)
 	{
-		m_pIDataBaseSink->EndService(this);
+		m_pIDataBaseSink->EndService(m_pIDataBaseSink);
+		//m_pIDataBaseSink->EndService(this);
 	}
 
 	return true;

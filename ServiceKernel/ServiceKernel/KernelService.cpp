@@ -26,7 +26,7 @@ CKernelService::~CKernelService()
 
 
 //获取调度引擎接口
-bool __cdecl CKernelService::GetMsgTriggerService(CMsgTriggerService ** pIObject)
+bool __cdecl CKernelService::GetMsgTriggerService(IMsgTriggerService ** pIObject)
 {
 	*pIObject = dynamic_cast<CMsgTriggerService*>(&m_MsgTriggerService);
 	if(*pIObject)
@@ -36,7 +36,7 @@ bool __cdecl CKernelService::GetMsgTriggerService(CMsgTriggerService ** pIObject
 }
 
 //获取网络引擎接口
-bool __cdecl CKernelService::GetTCPSocketService(CTCPSocketService ** pIObject)
+bool __cdecl CKernelService::GetTCPSocketService(ITCPSocketService ** pIObject)
 {
 	*pIObject = dynamic_cast<CTCPSocketService*>(&m_TCPSocketService);
 	if(*pIObject)
@@ -46,7 +46,7 @@ bool __cdecl CKernelService::GetTCPSocketService(CTCPSocketService ** pIObject)
 }
 
 //获取数据库引擎接口
-bool __cdecl CKernelService::GetDataBaseService(CDataBaseService ** pIObject)
+bool __cdecl CKernelService::GetDataBaseService(IDataBaseService ** pIObject)
 {
 	*pIObject = dynamic_cast<CDataBaseService*>(&m_DataBaseService);
 	if(*pIObject)
@@ -67,13 +67,13 @@ bool __cdecl CKernelService::GetDataBaseService(CDataBaseService ** pIObject)
 	//virtual bool __cdecl GetMsgTriggerQueueService(IDataQueueService * pIObject)=NULL;
 
 //获取数据库队列接口
-bool __cdecl CKernelService::GetDataBaseQueueService(CDataQueueService ** pIObject)
+bool __cdecl CKernelService::GetDataBaseQueueService(IDataQueueService ** pIObject)
 {
 	return m_DataBaseService.GetQueueService(pIObject);//.GetQueueService;//mark
 }
 
 //获取调度队列接口
-bool __cdecl CKernelService::GetMsgTriggerQueueService(CDataQueueService ** pIObject)
+bool __cdecl CKernelService::GetMsgTriggerQueueService(IDataQueueService ** pIObject)
 {
 	return m_MsgTriggerService.GetMsgTriggerQueueService(pIObject);
 }
@@ -91,7 +91,7 @@ bool __cdecl CKernelService::ControlService(void * pBuffer, WORD wDataSize)
 	}
 
 	//插入数据
-	CDataQueueService * pIQueueService;
+	IDataQueueService * pIQueueService;
 	if(m_MsgTriggerService.GetMsgTriggerQueueService(&pIQueueService)==false)
 	{
 		#ifdef _DEBUG
@@ -127,8 +127,8 @@ bool __cdecl CKernelService::StartService()
 		return true;
 	}
 	//接口查询
-	CTCPSocketService * pISocketService=&m_TCPSocketService;
-	CDataQueueService * pIMsgTriggerQueueService;
+	ITCPSocketService * pISocketService=&m_TCPSocketService;
+	IDataQueueService * pIMsgTriggerQueueService;
 	if(m_MsgTriggerService.GetMsgTriggerQueueService(&pIMsgTriggerQueueService) == false)
 	{
 		#ifdef _DEBUG
